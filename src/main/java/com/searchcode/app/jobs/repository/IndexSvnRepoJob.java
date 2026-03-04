@@ -93,7 +93,7 @@ public class IndexSvnRepoJob extends IndexBaseRepoJob {
     }
 
     public void updateIndex(RepoResult repoResult, String repoLocations, String repoRemoteLocation, boolean existingRepo, RepositoryChanged repositoryChanged) {
-        String repoSvnLocation = repoLocations + repoResult.getName();
+        String repoSvnLocation = repoLocations + repoResult.getDirectoryName();
         Path docDir = Paths.get(repoSvnLocation);
 
         this.logger.info(String.format("8183aa1c::doing full index for %s", repoResult.getName()));
