@@ -16,7 +16,6 @@
         <jbcrypt.version>0.4</jbcrypt.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.io.tmpdir>\tmp\search-code</java.io.tmpdir>
     </properties>
     <dependencies>
         <!-- Spark Java -->
@@ -46,7 +45,7 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.41.2.2</version>
+            <version>3.47.2.0</version>
         </dependency>
         <!-- MySQL/Sphinx http://sphinxsearch.com/forum/view.html?id=16178 must be version 5.1.35 -->
         <dependency>
@@ -248,7 +247,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.5.1</version>
                 <configuration>
-                    <argLine>-Djava.io.tmpdir=${java.io.tmpdir}</argLine>
                     <excludes>
                         <exclude>**/*ITCase.java</exclude>
                     </excludes>
@@ -261,13 +259,32 @@
                         </goals>
                         <phase>integration-test</phase>
                         <configuration>
-                            <argLine>-Djava.io.tmpdir=${java.io.tmpdir}</argLine>
                             <excludes>
                                 <exclude>none</exclude>
                             </excludes>
                             <includes>
                                 <include>**/*ITCase.java</include>
                             </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.7.1</version>
+                <executions>
+                    <execution>
+                        <id>make-zip</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/assembly/release.xml</descriptor>
+                            </descriptors>
+                            <appendAssemblyId>true</appendAssemblyId>
                         </configuration>
                     </execution>
                 </executions>

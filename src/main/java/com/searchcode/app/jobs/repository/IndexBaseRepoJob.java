@@ -145,8 +145,8 @@ public abstract class IndexBaseRepoJob implements Job {
 
                 var repoGitLocation = repoLocations + "/" + repoResult.getDirectoryName() + "/.git/";
 
-                var file = new File(repoGitLocation);
-                var existingRepo = file.exists(); // TODO this assumes git every time? Correct????
+                var existingRepo = new File(repoGitLocation).exists()
+                        || new File(repoLocations + "/" + repoResult.getDirectoryName() + "/.svn/").exists();
                 var useCredentials = repoResult.getUsername() != null && !repoResult.getUsername().isEmpty();
                 RepositoryChanged repositoryChanged;
 
