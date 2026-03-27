@@ -79,6 +79,11 @@ public class ServerRoutes {
             return new FreeMarkerEngine().render(new ModelAndView(codeRouteService.getProject(request, response), "repository_overview.ftl"));
         });
 
+        get("/repository/overview/:reponame/:repoid/", (request, response) -> {
+            var codeRouteService = new CodeRouteService();
+            return new FreeMarkerEngine().render(new ModelAndView(codeRouteService.getProject(request, response), "repository_overview.ftl"));
+        });
+
         get("/repository/list/", (request, response) -> {
             var codeRouteService = new CodeRouteService();
             return new FreeMarkerEngine().render(new ModelAndView(codeRouteService.getRepositoryList(request, response), "repository_list.ftl"));
