@@ -1,3 +1,4 @@
 echo "Launching searchcode server..."
-java -jar searchcode-1.3.15.jar
+for %%i in (searchcode-*.jar) do set "JARFILE=%%i"
+java -jar "%JARFILE%"
 

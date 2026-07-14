@@ -30,7 +30,7 @@ import hashlib
 import sys
 import datetime
 
-VERSION = "1.3.15"
+VERSION = "1.3.16-SNAPSHOT"
 
 
 def setup_npm():
@@ -229,7 +229,7 @@ def _build_package():
     local('cp ./searchcode-server.sh ./release/')
     local('cp ./searchcode-server.bat ./release/')
     local('mkdir ./release/logs')
-
+2
 
 def _python_sed(fileloc, replacements):
     import fileinput
