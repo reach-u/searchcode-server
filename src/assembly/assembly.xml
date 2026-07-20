@@ -1,0 +1,70 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 https://maven.apache.org/xsd/assembly-2.1.0.xsd">
+    <id>dist</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <files>
+        <!-- Main jar -->
+        <file>
+            <source>target/${project.artifactId}-${project.version}.jar</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+        <!-- Startup scripts -->
+        <file>
+            <source>searchcode-server.sh</source>
+            <outputDirectory>/</outputDirectory>
+            <fileMode>0755</fileMode>
+        </file>
+        <file>
+            <source>searchcode-server.bat</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+        <!-- Config files, renamed to their runtime names -->
+        <file>
+            <source>searchcode.properties.example</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>searchcode.properties</destName>
+        </file>
+        <file>
+            <source>quartz.properties</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+        <file>
+            <source>searchcode.sqlite.empty</source>
+            <outputDirectory>/</outputDirectory>
+            <destName>searchcode.sqlite</destName>
+        </file>
+        <file>
+            <source>README.md</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+    </files>
+
+    <fileSets>
+        <!-- include/ data files (OWASP, classifier, license databases) -->
+        <fileSet>
+            <directory>include</directory>
+            <outputDirectory>/include</outputDirectory>
+        </fileSet>
+        <!-- logs/ ships with only its README placeholder so local log files never end up in the zip -->
+        <fileSet>
+            <directory>logs</directory>
+            <outputDirectory>/logs</outputDirectory>
+            <includes>
+                <include>README</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/dependency-jars</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+</assembly>
